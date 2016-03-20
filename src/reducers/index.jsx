@@ -5,17 +5,17 @@ import {
   SET_PLAYER,
 } from '../actions';
 
-const initialVideoID = 'WwBdNXt6wO4';
+const initialVideoId = 'NkVsJGl5d6E';
+const initialAudioId = 'ThlhSnRk21E';
 const initialState = fromJS({
-  // TODO: Initialize the ytVideoObject here? (2016-03-20 12:00:43)
   ytVideoObject: {},
   ytAudioObject: {},
   videoSearch: 'Mandy Moore - Candy',
   audioSearch: 'DMX - Rough Riders',
-  videoId: initialVideoID,
-  audioId: initialVideoID,
-  videoThumbnail: `https://i.ytimg.com/vi/${initialVideoID}/mqdefault.jpg`,
-  audioThumbnail: `https://i.ytimg.com/vi/${initialVideoID}/mqdefault.jpg`,
+  videoId: 'NkVsJGl5d6E',
+  audioId: 'ThlhSnRk21E',
+  videoThumbnail: `https://i.ytimg.com/vi/${initialVideoId}/mqdefault.jpg`,
+  audioThumbnail: `https://i.ytimg.com/vi/${initialAudioId}/mqdefault.jpg`,
 });
 
 function reducer(state = initialState, action) {

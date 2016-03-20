@@ -24,7 +24,7 @@ const App = React.createClass({
           width="640"
           height="360"
           videoId={this.props.videoId}
-          setPlayer={this.props.setYtPlayer}
+          setYtPlayer={this.props.setYtPlayer}
           muted
         />
         <YoutubeVideo
@@ -33,7 +33,7 @@ const App = React.createClass({
           width="640"
           height="0"
           videoId={this.props.audioId}
-          setPlayer={this.props.setYtPlayer}
+          setYtPlayer={this.props.setYtPlayer}
         />
         <YoutubeControls
           videoPlayer={this.props.ytVideoObject}

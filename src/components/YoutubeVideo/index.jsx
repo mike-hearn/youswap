@@ -13,22 +13,22 @@ const YoutubeVideo = React.createClass({
   componentDidMount: function componentDidMount() {
     this.initializeYtObject();
   },
-  componentDidUpdate() {
-    this.props.player.cueVideoById(this.props.videoId, 0);
-  },
-  initializeYtObject: function() {
+  // componentDidUpdate() {
+    // this.props.player.cueVideoById(this.props.videoId, 0);
+  // },
+  initializeYtObject: function initializeYtObject() {
     const props = this.props;
 
     const onPlayerReady = (event) => {
       event.target.setVolume((props.muted) ? 0 : 100);
-      props.setPlayer(event.target, props.type);
-    }
+      props.setYtPlayer(event.target, props.type);
+    };
 
+    let YTPlayer = {};
     YouTubeIframeLoader.load(function newIframe(YT) {
-      const YTPlayer = new YT.Player(`yt_${props.type}`, {
+      YTPlayer = new YT.Player(`yt_${props.type}`, {
         height: props.height,
         width: props.width,
-        videoId: props.videoId,
         events: {
           'onReady': onPlayerReady,
         },
@@ -37,6 +37,8 @@ const YoutubeVideo = React.createClass({
         },
       });
     });
+
+    return YTPlayer;
   },
   render: function render() {
     const youtubeId = `yt_${this.props.type}`;
