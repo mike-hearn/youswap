@@ -1,23 +1,23 @@
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import React from 'react';
 
-const YoutubeVideo = React.createClass({
+const YoutubeControls = React.createClass({
   mixins: [PureRenderMixin],
   togglePlayPause: function() {
-    const players = [this.props.players.video, this.props.players.audio];
+    const players = [this.props.videoPlayer, this.props.audioPlayer];
 
     // If cued, play
-    if (this.props.players.video.getPlayerState() === 5) {
+    if (this.props.videoPlayer.getPlayerState() === 5) {
       players.map(p => p.playVideo());
     }
 
     // If playing, pause
-    if (this.props.players.video.getPlayerState() === 1) {
+    if (this.props.videoPlayer.getPlayerState() === 1) {
       players.map(p => p.pauseVideo());
     }
 
     // If paused, play
-    if (this.props.players.video.getPlayerState() === 2) {
+    if (this.props.videoPlayer.getPlayerState() === 2) {
       players.map(p => p.playVideo());
     }
   },
@@ -31,4 +31,4 @@ const YoutubeVideo = React.createClass({
   }
 });
 
-export default YoutubeVideo;
+export default YoutubeControls;

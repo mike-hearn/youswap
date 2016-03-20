@@ -11,11 +11,17 @@ const YoutubeVideo = React.createClass({
   },
   mixins: [PureRenderMixin],
   componentDidMount: function componentDidMount() {
+    this.initializeYtObject();
+  },
+  componentDidUpdate() {
+    this.props.player.cueVideoById(this.props.videoId, 0);
+  },
+  initializeYtObject: function() {
     const props = this.props;
 
-    function onPlayerReady(event) {
+    const onPlayerReady = (event) => {
       event.target.setVolume((props.muted) ? 0 : 100);
-      props.onReady(event.target, props.type);
+      props.setPlayer(event.target, props.type);
     }
 
     YouTubeIframeLoader.load(function newIframe(YT) {
@@ -27,18 +33,17 @@ const YoutubeVideo = React.createClass({
           'onReady': onPlayerReady,
         },
         playerVars: {
-          'controls': 0,
-        }
+          'controls': 0
+        },
       });
     });
-  },
-  componentDidUpdate() {
-    this.props.player.cueVideoById(this.props.videoId, 0);
   },
   render: function render() {
     const youtubeId = `yt_${this.props.type}`;
     return (
-      <div id={youtubeId}>
+      <div>
+        <div id={youtubeId}>
+        </div>
       </div>
     );
   }

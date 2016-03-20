@@ -1,12 +1,18 @@
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import React from 'react';
 
+import styles from './styles';
+
 const YoutubeThumbnail = React.createClass({
   mixins: [PureRenderMixin],
   render: function render() {
     return (
-      <div>
-        <img src={this.props.thumbnail} width="100" />
+      <div className={styles.container}>
+        <img
+          className={styles.ytThumbnail}
+          src={this.props.thumbnail}
+        />
+        <p className={styles.ytTitle}>{this.props.title}</p>
       </div>
     );
   }

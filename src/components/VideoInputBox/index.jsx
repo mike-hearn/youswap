@@ -1,6 +1,8 @@
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import React from 'react';
 
+import styles from './styles';
+
 const VideoInputBox = React.createClass({
   propTypes: {
     fetchSearchResults: React.PropTypes.func,
@@ -8,12 +10,6 @@ const VideoInputBox = React.createClass({
   },
   mixins: [PureRenderMixin],
   fetchSearchResults: function fetchSearchResults(q) {
-
-    // Stop if the video is currently playing
-    Object.keys(this.props.players).map(
-      (key) => this.props.players[key].stopVideo()
-    );
-
     const videoOrAudio = this.props.type;
     this.props.fetchSearchResults(q, videoOrAudio);
   },
@@ -21,6 +17,7 @@ const VideoInputBox = React.createClass({
     return (
       <div>
         <input
+          className={styles.input}
           type="text"
           ref="video_textbox"
           onChange={this.fetchSearchResults}

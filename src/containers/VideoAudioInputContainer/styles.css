@@ -1,0 +1,7 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-self: stretch;
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
