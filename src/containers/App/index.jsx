@@ -5,7 +5,8 @@ import YoutubeVideo from '../../components/YoutubeVideo';
 import YoutubeControls from '../../components/YoutubeControls';
 import VideoAudioInputContainer from '../../containers/VideoAudioInputContainer';
 
-import styles from './styles.css';
+import '../../shared/styles';
+import styles from './styles';
 
 const App = React.createClass({
   mixins: [PureRenderMixin],
@@ -15,29 +16,33 @@ const App = React.createClass({
   render: function render() {
     return (
       <div className={styles.normal}>
-        <h1 className={styles.title}>...</h1>
-        <p>Video from one, audio from another.</p>
+        <h1 className={styles.title}>
+          { <img className={styles.titleImage} src="http://localhost:8081/Youswap%20Heading%20Logo.svg" /> }
+        </h1>
+        <p className={styles.subtitle}>Combine video from one clip with audio from another.</p>
         <VideoAudioInputContainer {...this.props} />
         <YoutubeVideo
-          player={this.props.ytVideoObject}
           type="video"
-          width="640"
+          width="100%"
           height="360"
           videoId={this.props.videoId}
-          setYtPlayer={this.props.setYtPlayer}
+          playStatus={this.props.playStatus}
+          changePlayingStatus={this.props.changePlayingStatus}
           muted
         />
         <YoutubeVideo
-          player={this.props.ytAudioObject}
           type="audio"
-          width="640"
+          width="100%"
           height="0"
           videoId={this.props.audioId}
-          setYtPlayer={this.props.setYtPlayer}
+          playStatus={this.props.playStatus}
+          changePlayingStatus={this.props.changePlayingStatus}
         />
         <YoutubeControls
           videoPlayer={this.props.ytVideoObject}
           audioPlayer={this.props.ytAudioObject}
+          playStatus={this.props.playStatus}
+          changePlayingStatus={this.props.changePlayingStatus}
         />
       </div>
     );

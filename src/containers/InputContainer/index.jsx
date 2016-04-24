@@ -3,22 +3,20 @@ import React from 'react';
 
 import VideoInputBox from '../../components/VideoInputBox';
 import YoutubeThumbnail from '../../components/YoutubeThumbnail';
-import styles from './styles.css';
+
+import styles from './styles';
 
 const InputContainer = React.createClass({
   render: function render() {
     return (
       <div className={styles.normal}>
-        <p>Search For Your {
-          this.props.type.charAt(0).toUpperCase() + this.props.type.slice(1)
-        }</p>
+        <YoutubeThumbnail
+          thumbnail={`https://i.ytimg.com/vi/${this.props.youtubeId}/mqdefault.jpg`}
+          title={this.props.title}
+        />
         <VideoInputBox
           type={this.props.type}
           fetchSearchResults={this.props.fetchSearchResults}
-        />
-        <YoutubeThumbnail
-          thumbnail={this.props.thumbnail}
-          title={this.props.title}
         />
       </div>
     );

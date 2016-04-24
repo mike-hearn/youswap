@@ -1,8 +1,8 @@
 import React from 'react';
 import thunkMiddleware from 'redux-thunk';
-import {bindActionCreators, createStore, applyMiddleware, compose} from 'redux';
-import {connect, Provider} from 'react-redux';
-import {render} from 'react-dom';
+import { bindActionCreators, createStore, applyMiddleware, compose } from 'redux';
+import { connect, Provider } from 'react-redux';
+import { render } from 'react-dom';
 
 import App from './containers/App';
 import * as actions from './actions';
@@ -11,14 +11,11 @@ import reducer from './reducers';
 
 function mapStateToProps(state) {
   return {
-    ytVideoObject: state.get('ytVideoObject'),
-    ytAudioObject: state.get('ytAudioObject'),
     videoTitle: state.get('videoTitle'),
     audioTitle: state.get('audioTitle'),
     videoId: state.get('videoId'),
     audioId: state.get('audioId'),
-    videoThumbnail: state.get('videoThumbnail'),
-    audioThumbnail: state.get('audioThumbnail'),
+    playStatus: state.get('playStatus'),
   };
 }
 

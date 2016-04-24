@@ -2,7 +2,7 @@ import fetch from 'isomorphic-fetch';
 
 export const REQUEST_SEARCH_RESULTS = 'REQUEST_SEARCH_RESULTS';
 export const RECEIVE_SEARCH_RESULTS = 'RECEIVE_SEARCH_RESULTS';
-export const SET_PLAYER = 'SET_PLAYER';
+export const CHANGE_PLAYING_STATUS = 'CHANGE_PLAYING_STATUS';
 
 export function requestSearchResults(query) {
   return {
@@ -12,23 +12,19 @@ export function requestSearchResults(query) {
 }
 
 export function receieveSearchResults(query, json, videoOrAudio) {
-  console.log(query);
-  console.log(json);
   return {
     type: RECEIVE_SEARCH_RESULTS,
     query,
     videoOrAudio,
     title: json.items[0].snippet.title,
     videoId: json.items[0].id.videoId,
-    videoThumbnail: json.items[0].snippet.thumbnails.medium.url,
   };
 }
 
-export function setYtPlayer(ytObject, type) {
+export function changePlayingStatus(newStatus) {
   return {
-    type: SET_PLAYER,
-    ytObject,
-    videoOrAudio: type,
+    type: CHANGE_PLAYING_STATUS,
+    newStatus
   };
 }
 

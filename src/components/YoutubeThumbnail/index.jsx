@@ -8,6 +8,7 @@ const YoutubeThumbnail = React.createClass({
   render: function render() {
     return (
       <div className={styles.container}>
+        <div className={styles.gradientOverlay} />
         <img
           className={styles.ytThumbnail}
           src={this.props.thumbnail}

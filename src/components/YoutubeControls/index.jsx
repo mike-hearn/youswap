@@ -1,31 +1,24 @@
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import React from 'react';
 
+import styles from './styles';
+
 const YoutubeControls = React.createClass({
   mixins: [PureRenderMixin],
-  togglePlayPause: function() {
-    const players = [this.props.videoPlayer, this.props.audioPlayer];
-
-    // If cued, play
-    if (this.props.videoPlayer.getPlayerState() === 5) {
-      players.map(p => p.playVideo());
-    }
-
-    // If playing, pause
-    if (this.props.videoPlayer.getPlayerState() === 1) {
-      players.map(p => p.pauseVideo());
-    }
-
-    // If paused, play
-    if (this.props.videoPlayer.getPlayerState() === 2) {
-      players.map(p => p.playVideo());
+  togglePlayPause: function togglePlayPause() {
+    const playStatus = this.props.playStatus;
+    // If it's paused, stopped or unstarted - play it
+    if ([-1, 2, 5].indexOf(playStatus) > -1) {
+      this.props.changePlayingStatus(1);
+      // If it's playing, pause it
+    } else if (playStatus === 1) {
+      this.props.changePlayingStatus(2);
     }
   },
-  render: function() {
+  render: function render() {
     return (
-      <div>
-        <button onClick={this.togglePlayPause}>Toggle Play</button>
-        <button>Restart</button>
+      <div className={styles.container}>
+        <button className={styles.playButton} onClick={this.togglePlayPause}>Toggle Play</button>
       </div>
     );
   }

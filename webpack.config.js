@@ -1,5 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
+const cssnext = require('postcss-cssnext');
+const precss = require('precss');
 
 module.exports = {
   entry: [
@@ -13,7 +15,7 @@ module.exports = {
     filename: 'bundle.js'
   },
   resolve: {
-    extensions: ['', '.js', '.jsx'],
+    extensions: ['', '.js', '.jsx', '.css', '.scss'],
   },
   devServer: {
     contentBase: './dist',
@@ -21,15 +23,15 @@ module.exports = {
   },
   module: {
     loaders: [
-      {
-        test: /\.jsx?$/,
-        loaders: ['react-hot', 'babel'],
-        include: path.join(__dirname, 'src'),
-      },
-      { test: /\.css$/, loader: 'style!css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]' },
-      { test: /\.scss$/, loader: 'style!css!sass?sourceMap' },
-      { test: /\.(woff|woff2|ttf|eot|otf|svg)$/, loader: 'url' },
+      { test: /\.jsx?$/, loaders: ['react-hot', 'babel'], include: path.join(__dirname, 'src') },
+      { test: /\.css$/, loader: 'style-loader!css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss-loader' },
+      { test: /\.scss$/, loader: 'style!css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss?parser=postcss-scss!sass?sourceMap' },
+      { test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url-loader?limit=10000&mimetype=application/font-woff" },
+      { test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "file-loader" }
     ],
+  },
+  postcss: function postcss() {
+    return [cssnext, precss];
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin()
