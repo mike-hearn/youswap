@@ -2,6 +2,7 @@
 
 .container {
   display: flex;
+  flex-flow: column wrap;
   justify-content: space-between;
   align-self: stretch;
   margin-top: 2%;

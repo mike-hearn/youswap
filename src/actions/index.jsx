@@ -3,6 +3,7 @@ import fetch from 'isomorphic-fetch';
 export const REQUEST_SEARCH_RESULTS = 'REQUEST_SEARCH_RESULTS';
 export const RECEIVE_SEARCH_RESULTS = 'RECEIVE_SEARCH_RESULTS';
 export const CHANGE_PLAYING_STATUS = 'CHANGE_PLAYING_STATUS';
+export const SAVE_CLIP_DURATION = 'SAVE_CLIP_DURATION';
 
 export function requestSearchResults(query) {
   return {
@@ -38,3 +39,10 @@ export function fetchSearchResults(q, videoOrAudio) {
   };
 }
 
+export function setClipDuration(duration, clipType) {
+  return {
+    type: SAVE_CLIP_DURATION,
+    duration,
+    clipType
+  };
+}

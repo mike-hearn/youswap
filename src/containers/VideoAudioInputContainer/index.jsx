@@ -15,12 +15,14 @@ const VideoAudioInputContainer = React.createClass({
           fetchSearchResults={this.props.fetchSearchResults}
           youtubeId={this.props.videoId}
           title={this.props.videoTitle}
+          search={this.props.videoSearchLabel}
         />
         <InputContainer
           type="audio"
           fetchSearchResults={this.props.fetchSearchResults}
           youtubeId={this.props.audioId}
           title={this.props.audioTitle}
+          search={this.props.audioSearchLabel}
         />
       </div>
     );

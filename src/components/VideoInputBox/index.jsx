@@ -16,19 +16,22 @@ const VideoInputBox = React.createClass({
   render: function render() {
     function displayIcon(type) {
       return (type === 'video') ?
-        <img className={styles.icon} src="http://localhost:8081/video-camera-icon.svg" /> :
-        <img className={styles.icon} src="http://localhost:8081/audio-icon.svg" />;
+        <img className={styles.icon} src="https://f001.backblaze.com/file/testbucket-ymq8ddaa/video-camera-icon.svg" /> :
+        <img className={styles.icon} src="https://f001.backblaze.com/file/testbucket-ymq8ddaa/audio-icon.svg" />;
     }
     return (
       <div className={styles.container}>
-        {displayIcon(this.props.type)}
-        <input
-          className={styles.input}
-          type="text"
-          ref="video_textbox"
-          onChange={this.fetchSearchResults}
-          placeholder={`Search for an ${this.props.type} track`}
-        />
+        <div className={styles.innerContainer}>
+          {displayIcon(this.props.type)}
+          <input
+            className={styles.input}
+            type="text"
+            ref="video_textbox"
+            onChange={this.fetchSearchResults}
+            placeholder={this.props.search}
+          />
+        </div>
+        <p>{this.props.title ? this.props.title : `Search for ${this.props.type} track`}</p>
       </div>
     );
   }

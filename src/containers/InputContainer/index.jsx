@@ -17,6 +17,7 @@ const InputContainer = React.createClass({
         <VideoInputBox
           type={this.props.type}
           fetchSearchResults={this.props.fetchSearchResults}
+          {...this.props}
         />
       </div>
     );

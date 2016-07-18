@@ -2,7 +2,7 @@ import PureRenderMixin from 'react-addons-pure-render-mixin';
 import React from 'react';
 import YouTubeIframeLoader from 'youtube-iframe';
 
-import styles from './styles';
+import styles from './styles.scss';
 
 const YoutubeVideo = React.createClass({
   propTypes: {
@@ -22,12 +22,22 @@ const YoutubeVideo = React.createClass({
     const player = this.ytPlayerObject;
     const playStatus = this.props.playStatus;
 
-    if (playStatus === 2) {
-      player.pauseVideo();
-    } else if (playStatus === 1) {
-      player.playVideo();
-    } else if (playStatus === 6) {
-      this.ytPlayerObject.cueVideoById(this.props.videoId);
+    switch (playStatus) {
+      case 1: // Playing state
+        player.playVideo();
+        this.props.setClipDuration(player.getDuration(), this.props.type);
+        break;
+      case 2: // Paused state
+        player.pauseVideo();
+        break;
+      case 6: // Custom state meaning a new video has been selected
+        player.cueVideoById(this.props.videoId);
+        break;
+      case 0: // Custom state meaning a new video has been selected
+        player.stopVideo();
+        break;
+      default:
+        break;
     }
 
     const playerState = player.getPlayerState();
@@ -40,9 +50,6 @@ const YoutubeVideo = React.createClass({
       this.props.changePlayingStatus(6);
     }
   },
-  // Initialize an empty object, which will hold the ytPlayer object upon
-  // initialization.
-  ytPlayerObject: {},
   initializeYtObject: function initializeYtObject() {
     const props = this.props;
     const handlePlayerStateChange = this.handlePlayerStateChange;
@@ -50,6 +57,7 @@ const YoutubeVideo = React.createClass({
     const onPlayerReady = (event) => {
       event.target.setVolume((props.muted) ? 0 : 100);
       this.ytPlayerObject = event.target;
+      this.props.setPlayerObject(event.target, this.props.type);
     };
 
 
@@ -64,17 +72,13 @@ const YoutubeVideo = React.createClass({
           'onStateChange': handlePlayerStateChange,
         },
         playerVars: {
+          'controls': 0,
         },
       });
     });
-
-    return YTPlayer;
   },
   handlePlayerStateChange: function handleStateChange() {
     let playerState = this.ytPlayerObject.getPlayerState();
-
-    // TODO: Remove console.log statement after debugging (2016-03-26 16:46:20)
-    console.log(playerState);
 
     if (this.props.playStatus !== playerState) {
       this.props.changePlayingStatus(playerState);

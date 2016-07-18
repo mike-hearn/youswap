@@ -16,6 +16,10 @@ function mapStateToProps(state) {
     videoId: state.get('videoId'),
     audioId: state.get('audioId'),
     playStatus: state.get('playStatus'),
+    videoSearchLabel: state.get('videoSearchLabel'),
+    audioSearchLabel: state.get('audioSearchLabel'),
+    clipVideoDuration: state.get('clipVideoDuration'),
+    clipAudioDuration: state.get('clipAudioDuration'),
   };
 }
 

@@ -3,16 +3,35 @@
   margin: 0.5em auto;
   width: 100%;
   background-color: rgba(0,0,0,0);
-  border: none;
+  padding: 0.2em 0.2em 0.2em 2.5em;
+  border: 1px solid rgba(255,255,255,0.2);
 }
 
 .container {
-    border-bottom: 1px solid white;
     margin-bottom: 1em;
     display: flex;
+    flex: 1 0 80%;
+    flex-direction: column;
+
+    p {
+        font-size: 0.8em;
+        margin-top: 0.3em;
+        height: 1em;
+    }
+}
+
+.innerContainer {
+    display: inherit;
+    position: relative;
     flex-direction: row;
+    align-items: center;
+    border-bottom: 1px solid white;
 }
 
 .icon {
+    position: absolute;
+    top: 1.05em;
+    left: 0.7em;
     margin-right: 0.5em;
 }
+

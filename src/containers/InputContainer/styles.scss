@@ -7,9 +7,10 @@
 .normal {
   border: 1px solid rgba(0,0,0,0.1);
   display: inherit;
-  flex-direction: column;
-  flex: 0 1 400px;
+  flex-direction: row;
+  flex: 0 1 auto;
   justify-content: space-between;
-  max-width: 48%;
   padding: 10px;
+  align-items: center;
+  margin-bottom: 1rem;
 }

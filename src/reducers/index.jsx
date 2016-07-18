@@ -3,15 +3,18 @@ import {
   REQUEST_SEARCH_RESULTS,
   RECEIVE_SEARCH_RESULTS,
   CHANGE_PLAYING_STATUS,
+  SAVE_CLIP_DURATION,
 } from '../actions';
 
-const initialVideoId = 'zTs5zjSXnvs';
-const initialAudioId = 'cneoivROlDo';
+const initialVideoId = 'C-u5WLJ9Yk4';
+const initialAudioId = 'ThlhSnRk21E';
 const initialState = fromJS({
-  videoSearch: 'Mandy Moore - Candy',
-  audioSearch: 'DMX - Rough Riders',
+  videoSearchLabel: 'Britney Spears - ...Baby One More Time',
+  audioSearchLabel: 'DMX - Ruff Ryders Anthem',
   videoId: initialVideoId,
   audioId: initialAudioId,
+  videoTitle: 'Search for a video track',
+  audioTitle: 'Search for an audio track',
   playStatus: 2,
 });
 
@@ -20,7 +23,10 @@ function reducer(state = initialState, action) {
 
   switch (action.type) {
     case REQUEST_SEARCH_RESULTS:
-      return state;
+      return state.merge({
+        videoSearchLabel: 'Search for a video track',
+        audioSearchLabel: 'Search for an audio track',
+      });
 
     case RECEIVE_SEARCH_RESULTS:
       if (action.videoOrAudio === 'video') {
@@ -40,6 +46,14 @@ function reducer(state = initialState, action) {
 
     case CHANGE_PLAYING_STATUS:
       return state.merge({ playStatus: action.newStatus });
+
+    case SAVE_CLIP_DURATION:
+      if (action.clipType === "video") {
+         returnState = state.merge({ clipVideoDuration: action.duration });
+      } else {
+        returnState = state.merge({ clipAudioDuration: action.duration });
+      }
+      return returnState;
 
     default:
       return state;
